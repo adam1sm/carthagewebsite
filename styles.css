@@ -1,0 +1,786 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --is-dark-bg: 1; /* 1 for dark background, 0 for light background */
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Landing Section */
+.landing-section {
+  position: relative;
+  background-image: url(sanfran.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center top;
+  height: 100vh;
+  width: 100%;
+}
+
+/* Navigation */
+.navbar {
+  background-color: transparent;
+  padding: 15px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.navdiv {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.logo img {
+  height: 60px;
+  width: auto;
+}
+
+nav ul li {
+  list-style: none;
+  display: inline-block;
+  position: relative; /* Added for hover effect */
+}
+
+nav ul li a {
+  color: black;
+  font-size: 18px;
+  font-weight: 500;
+  margin-right: 25px;
+  text-decoration: none;
+  transition: color 0.3s ease; /* Smooth color transition */
+  position: relative; /* Added for underline effect */
+  padding: 5px 0; /* Added padding for hover effect */
+}
+
+/* Hover effect - sliding underline */
+nav ul li a:not(.waitlist-btn)::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: black;
+  transition: width 0.3s ease;
+}
+
+nav ul li a:not(.waitlist-btn):hover::after {
+  width: 100%;
+}
+
+/* Subtle text color change on hover */
+nav ul li a:not(.waitlist-btn):hover {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+/* Active state styling */
+nav ul li a.active::after {
+  width: 100%;
+}
+
+.waitlist-btn {
+  border: none;
+  position: relative;
+  display: inline-block;
+}
+
+.waitlist-btn:hover {
+  transform: translateY(-2px);
+}
+
+
+/* Ensure waitlist button doesn't get the underline effect */
+
+button {
+  background-color: black;
+  border-radius: 100px;
+  padding: 12px 24px;  /* Increased padding for better proportions */
+  width: auto;         /* Changed from fixed width to auto */
+  min-width: 160px;    /* Added min-width instead of fixed width */
+  margin-top: 15px;
+  border: 2px solid transparent; /* Added for hover effect */
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;    /* Increased from 500 */
+  transition: all 0.3s ease; /* Smooth transition for hover effects */
+}
+
+.navbar button {
+  background-color: rgba(0, 0, 0, 0.8); /* Slightly transparent */
+  backdrop-filter: blur(8px);           /* Adds frosted glass effect */
+  margin: 0 0 0 10px;                   /* Adjusted margins */
+}
+
+.navbar button:hover {
+  background-color: black;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.navbar button a {
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+}
+
+button a {
+  color: white;
+  font-weight: 500;
+  font-size: 15px;
+  text-decoration: none;
+}
+
+/* Hero Text */
+.hero-text {
+  position: absolute;
+  top: 50%;
+  right: 10%;
+  transform: translateY(-50%);
+  color: white;
+  width: 700px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  text-align: left;
+}
+
+.hero-text h1 {
+  font-family: 'Source Serif Pro', serif;
+  font-weight: 700;
+  font-size: 8rem;
+  margin: 0;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.hero-text p {
+  font-size: 1.25rem;  /* Increased from 18px for better readability */
+  margin: 20px 0 30px; /* Increased spacing for better visual hierarchy */
+  max-width: 600px;    /* Changed from fixed width to max-width for better responsiveness */
+  font-weight: 500;    /* Increased from 400 for better contrast against background */
+  letter-spacing: -0.02em; /* Matched with heading for consistency */
+  line-height: 1.5;    /* Added line-height for better readability */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* Added subtle text shadow for better legibility */
+}
+
+.hero-text .cta {
+  background-color: white;
+  color: black;
+  font-size: 1.1rem;
+  position: relative;  /* Changed from absolute */
+  left: 0;            /* Reset positioning */
+  bottom: 0;          /* Reset positioning */
+  margin-top: 30px;   /* Added margin instead of absolute positioning */
+  border: 2px solid white;
+}
+
+.hero-text .cta:hover {
+  background-color: transparent;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Features Sections */
+.features-section {
+  min-height: 100vh;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  padding: 50px 20px;
+}
+
+.features-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  gap: 50px;
+  align-items: center;
+}
+
+.features-hero {
+  flex: 1;
+  padding-right: 50px;
+}
+
+.features-hero .subtext {
+  font-size: 1.2rem;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.features-hero h2 {
+  font-family: 'Source Serif Pro', serif;
+  font-size: 8rem;
+  line-height: 1;
+  margin-bottom: 20px;
+  color: black;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.features-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+
+.feature-box {
+  background-color: #f8f8f8;
+  padding: 30px;
+  border-radius: 15px;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.feature-box:hover {
+  transform: translateY(-5px);
+}
+
+.feature-number {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #999;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.feature-box h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: black;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.feature-box p {
+  color: #666;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+/* Alternative Features Section */
+.features-section-alt {
+  background-color: #f8f8f8;
+}
+
+.features-section-alt .features-content {
+  flex-direction: row; /* Changed from row-reverse */
+}
+
+.features-section-alt .features-hero {
+  padding-right: 0;
+  padding-left: 50px;
+}
+
+.features-section-alt .feature-box {
+  background-color: white;
+  border: 1px solid #eee;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .features-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .features-section-alt .features-content {
+    flex-direction: column;
+  }
+  
+  .features-hero {
+    padding-right: 0;
+    padding-left: 0;
+    text-align: center;
+  }
+  
+  .features-hero p {
+    margin: 0 auto;
+  }
+  
+  .features-grid {
+    width: 100%;
+  }
+
+  .features-hero h2 {
+    font-size: 3.5rem;
+    
+  }
+}
+
+@media (max-width: 768px) {
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .hero-text {
+    width: 90%;
+    right: 5%;
+  }
+  
+  .hero-text h1 {
+    font-size: 3.5rem;
+    line-height: normal;
+  }
+  
+  .hero-text p {
+    width: 100%;
+  }
+
+  .features-hero h2 {
+    font-size: 2.8rem;
+  }
+}
+/* Add these styles to your existing CSS file */
+
+/* FAQ Section */
+.faq-section {
+  min-height: 100vh;
+  background-color: white;
+  padding: 100px 20px;
+}
+
+.faq-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.faq-title {
+  font-family: 'Source Serif Pro', serif;
+  font-size: 6rem;
+  margin-bottom: 60px;
+  text-align: center;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.faq-item {
+  margin-bottom: 20px;
+  border: 1px solid #eee;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.faq-question {
+  background-color: white;
+  padding: 25px 30px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+.faq-question:hover {
+  background-color: #f8f8f8;
+}
+
+.faq-question h3 {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+.faq-question .icon {
+  width: 24px;
+  height: 24px;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.faq-question .icon::before,
+.faq-question .icon::after {
+  content: '';
+  position: absolute;
+  background-color: #1a1a1a;
+  transition: transform 0.3s ease;
+}
+
+.faq-question .icon::before {
+  width: 2px;
+  height: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.faq-question .icon::after {
+  width: 24px;
+  height: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.faq-item.active .icon::before {
+  transform: translateX(-50%) rotate(90deg);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.3s ease-out;
+  background-color: white;
+  padding: 0 30px;
+}
+
+.faq-item.active .faq-answer {
+  max-height: none; /* Changed from fixed height to none */
+  padding: 20px 30px;
+  border-top: 1px solid #eee;
+}
+
+/* Add transition for smooth padding change */
+.faq-answer p {
+  margin: 0;
+  line-height: 1.6;
+  color: #666;
+  padding-bottom: 5px; /* Added padding at bottom of paragraphs */
+}
+
+/* Add extra space for last paragraph in answer */
+.faq-answer p:last-child {
+  padding-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+  .faq-title {
+    font-size: 3rem;
+    margin-bottom: 40px;
+  }
+  
+  .faq-question h3 {
+    font-size: 1.1rem;
+    padding-right: 20px;
+  }
+}
+
+.footer {
+  background-color: #f8f8f8;
+  padding: 80px 20px 30px;
+  font-family: 'Inter', sans-serif;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 40px;
+}
+
+.footer-logo {
+  height: 50px;
+  width: auto;
+  margin-bottom: 20px;
+}
+
+.footer-section p {
+  color: #666;
+  line-height: 1.5;
+  margin-top: 10px;
+  font-size: 0.95rem;
+}
+
+.footer-section h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #000;
+}
+
+.footer-section ul {
+  list-style: none;
+}
+
+/* Updated footer link styles */
+.footer-section ul li {
+  margin-bottom: 12px;
+  position: relative; /* Added for hover effect positioning */
+}
+
+.footer-section ul li a {
+  color: #666;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.3s ease;
+  position: relative;
+  padding: 2px 0; /* Added padding for hover effect */
+  display: inline-block; /* Needed for proper underline animation */
+}
+
+/* Sliding underline effect for footer links */
+.footer-section ul li a:not(.waitlist-link)::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 1px; /* Slightly thinner than navbar for subtlety */
+  bottom: 0;
+  left: 0;
+  background-color: #000;
+  transition: width 0.3s ease;
+}
+
+.footer-section ul li a:not(.waitlist-link):hover::after {
+  width: 100%;
+}
+
+/* Color change on hover */
+.footer-section ul li a:not(.waitlist-link):hover {
+  color: #000;
+}
+
+/* Maintain existing waitlist link styles */
+.footer-section .waitlist-link {
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.footer-section .waitlist-link:hover {
+  color: #000;
+}
+
+/* Ensure center alignment works with hover effect in mobile */
+@media (max-width: 768px) {
+  .footer-section ul li {
+    text-align: center;
+  }
+  
+  .footer-section ul li a {
+    display: inline-block;
+  }
+}
+
+.footer-bottom {
+  max-width: 1200px;
+  margin: 60px auto 0;
+  padding-top: 30px;
+  border-top: 1px solid #eee;
+  text-align: center;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 1024px) {
+  .footer-content {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+  
+  .footer-section:first-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  
+  .footer-section {
+    margin-bottom: 40px;
+  }
+  
+  .footer-logo {
+    margin: 0 auto 20px;
+  }
+}
+
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(100px);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, opacity;
+}
+
+.animate-on-scroll.from-right {
+  transform: translateY(100px);
+}
+
+.animate-on-scroll.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.animate-on-scroll.exit-above {
+  opacity: 0;
+  transform: translateY(-100px);
+}
+
+.animate-on-scroll.exit-below {
+  opacity: 0;
+  transform: translateY(100px);
+}
+
+@media (max-width: 768px) {
+  button {
+    padding: 10px 20px;
+    min-width: 140px;
+    font-size: 0.9rem;
+  }
+  
+  .hero-text .cta {
+    margin-top: 20px;
+    font-size: 1rem;
+  }
+}
+
+.navbar a.active {
+  color: #000;
+  font-weight: 600;
+}
+
+/* Optional: Add hover effect for logos */
+.logo img, .footer-logo {
+  transition: transform 0.3s ease;
+}
+
+.logo img:hover, .footer-logo:hover {
+  transform: scale(1.05);
+} 
+
+@keyframes modalFade {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-modal {
+  animation: modalFade 0.3s ease-out;
+}
+
+/* Style for waitlist links in footer */
+.waitlist-link {
+  cursor: pointer;
+}
+
+/* Optional: Add hover effect for footer waitlist link */
+.footer-section .waitlist-link:hover {
+  color: #000;
+}
+
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal.active {
+  display: flex;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+  animation: modalSlide 0.3s ease-out;
+}
+
+@keyframes modalSlide {
+  from {
+      opacity: 0;
+      transform: translateY(-20px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+.modal-close {
+  position: absolute;
+  right: -3rem;
+  top: -1rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: #666;
+}
+
+.modal-close:hover {
+  color: #000;
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-weight: 500;
+  color: #333;
+}
+
+.form-group input {
+  padding: 0.75rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 100px;
+  font-size: 1rem;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #000;
+}
+
+.radio-group {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.success-message {
+  text-align: center;
+  padding: 2rem;
+}
+
+/* Optional: Add delay classes for cascade effect */
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; }
+.delay-3 { transition-delay: 0.3s; }
+.delay-4 { transition-delay: 0.4s; }
+
+
