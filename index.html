@@ -192,6 +192,9 @@
       <div class="footer-section">
         <img src="logo2.png" alt="Carthage Logo" class="footer-logo">
         <p> Founded in Columbus, OH by Adam Khadre.</p>
+        <p>
+          <a href="mailto:info@carthageinvest.com">info@carthageinvest.com</a>
+        </p>
       </div>
       
       <div class="footer-section">
@@ -234,28 +237,27 @@
         <button class="modal-close">&times;</button>
         <div id="modalContent">
             <h2 style="font-family: 'Source Serif Pro', serif; font-size: 2rem; margin-bottom: 1.5rem;">Join the Waitlist</h2>
-            <form class="modal-form" id="waitlistForm">
-
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" required>
+            <form class="modal-form" id="waitlistForm" onsubmit="handleSubmit(event)">
+              <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" required>
+              </div>
+              <div class="form-group">
+                <label>I am a:</label>
+                <div class="radio-group">
+                  <label>
+                    <input type="radio" name="userType" value="investor" checked>
+                    Potential Investor
+                  </label>
+                  <label>
+                    <input type="radio" name="userType" value="founder">
+                    Founder/Affiliate
+                  </label>
                 </div>
-                <div class="form-group">
-                    <label>I am a:</label>
-                    <div class="radio-group">
-                        <label>
-                            <input type="radio" name="userType" value="investor" checked>
-                            Potential Investor
-                        </label>
-                        <label>
-                            <input type="radio" name="userType" value="founder">
-                            Founder/Affiliate
-                        </label>
-                    </div>
-                </div>
-                <button type="submit" style="background-color: black; color: white; padding: 1rem 2rem; border-radius: 100px; border: none; font-weight: 600; cursor: pointer; margin-top: 1rem;">
-                    Join Waitlist
-                </button>
+              </div>
+              <button type="submit" style="background-color: black; color: white; padding: 1rem 2rem; border-radius: 100px; border: none; font-weight: 600; cursor: pointer; margin-top: 1rem;">
+                Join Waitlist
+              </button>
             </form>
         </div>
     </div>
