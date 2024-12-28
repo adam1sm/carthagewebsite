@@ -280,6 +280,41 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
     });
+
+    const animateBoxes = () => {
+      const featureSections = document.querySelectorAll('.features-section');
+      
+      featureSections.forEach(section => {
+        const boxes = section.querySelectorAll('.feature-box');
+        const sectionTop = section.getBoundingClientRect().top;
+        const sectionBottom = section.getBoundingClientRect().bottom;
+        const windowHeight = window.innerHeight;
+        
+        // Calculate how far through the section we've scrolled
+        const scrollProgress = (windowHeight - sectionTop) / (windowHeight + section.offsetHeight);
+        
+        boxes.forEach((box, index) => {
+          // Stagger the animations based on index
+          const delay = index * 0.1;
+          const adjustedProgress = Math.max(0, Math.min(1, scrollProgress - delay));
+          
+          if (sectionTop < windowHeight && sectionBottom > 0) {
+            // Box is in view
+            const translateX = (1 - adjustedProgress) * 100; // Start from 100px offset
+            const opacity = adjustedProgress;
+            
+            if (section.classList.contains('features-section-alt')) {
+              // Animate from left for alternate section
+              box.style.transform = `translateX(${-translateX}px)`;
+            } else {
+              // Animate from right for first section
+              box.style.transform = `translateX(${translateX}px)`;
+            }
+            box.style.opacity = opacity;
+          }
+        });
+      });
+    };
     
     navLinks.forEach(link => {
       link.classList.remove('active');
@@ -295,4 +330,36 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+
+  animateBoxes();
+  window.addEventListener('scroll', () => {
+    requestAnimationFrame(animateBoxes);
+  });
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+  const hamburger = document.querySelector('.hamburger');
+  const navMenu = document.querySelector('nav ul');
+  
+  hamburger.addEventListener('click', function() {
+    hamburger.classList.toggle('active');
+    navMenu.classList.toggle('active');
+  });
+  
+  // Close menu when clicking a link
+  document.querySelectorAll('nav ul li a').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('active');
+      navMenu.classList.remove('active');
+    });
+  });
+  
+  // Close menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+      hamburger.classList.remove('active');
+      navMenu.classList.remove('active');
+    }
+  });
+});
+
