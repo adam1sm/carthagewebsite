@@ -281,40 +281,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    const animateBoxes = () => {
-      const featureSections = document.querySelectorAll('.features-section');
-      
-      featureSections.forEach(section => {
-        const boxes = section.querySelectorAll('.feature-box');
-        const sectionTop = section.getBoundingClientRect().top;
-        const sectionBottom = section.getBoundingClientRect().bottom;
-        const windowHeight = window.innerHeight;
-        
-        // Calculate how far through the section we've scrolled
-        const scrollProgress = (windowHeight - sectionTop) / (windowHeight + section.offsetHeight);
-        
-        boxes.forEach((box, index) => {
-          // Stagger the animations based on index
-          const delay = index * 0.1;
-          const adjustedProgress = Math.max(0, Math.min(1, scrollProgress - delay));
-          
-          if (sectionTop < windowHeight && sectionBottom > 0) {
-            // Box is in view
-            const translateX = (1 - adjustedProgress) * 100; // Start from 100px offset
-            const opacity = adjustedProgress;
-            
-            if (section.classList.contains('features-section-alt')) {
-              // Animate from left for alternate section
-              box.style.transform = `translateX(${-translateX}px)`;
-            } else {
-              // Animate from right for first section
-              box.style.transform = `translateX(${translateX}px)`;
-            }
-            box.style.opacity = opacity;
-          }
-        });
-      });
-    };
+  
     
     navLinks.forEach(link => {
       link.classList.remove('active');
@@ -331,10 +298,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  animateBoxes();
-  window.addEventListener('scroll', () => {
-    requestAnimationFrame(animateBoxes);
-  });
+
 });
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -363,3 +327,65 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
+function handleSubmit(event) {
+  event.preventDefault();
+  
+  const email = document.getElementById('email').value;
+  const userType = document.querySelector('input[name="userType"]:checked').value;
+  
+  // Show loading state
+  const submitButton = event.target.querySelector('button[type="submit"]');
+  const originalButtonText = submitButton.innerHTML;
+  submitButton.innerHTML = 'Submitting...';
+  submitButton.disabled = true;
+
+  // Create a hidden iframe
+  let iframe = document.createElement('iframe');
+  iframe.style.display = 'none';
+  document.body.appendChild(iframe);
+
+  // Create form within iframe
+  let formString = `
+    <form id="hidden-form" action="https://script.google.com/macros/s/AKfycbyXSDWxZSSdVDPFycNlPABg7qvE1-fUmGkQFY7gsjqIYdw9jWyx9rudEDq3lxqpM54L/exec" method="POST">
+      <input type="hidden" name="email" value="${encodeURIComponent(email)}">
+      <input type="hidden" name="userType" value="${encodeURIComponent(userType)}">
+    </form>
+    <script>document.getElementById('hidden-form').submit();</script>
+  `;
+
+  // Handle response
+  iframe.onload = function() {
+    // Show success message
+    const modalContent = document.getElementById('modalContent');
+    modalContent.innerHTML = `
+      <div class="success-message">
+        <h2 style="font-family: 'Source Serif Pro', serif; font-size: 2rem; margin-bottom: 1rem;">Thank You!</h2>
+        <p style="color: #666; margin-bottom: 1.5rem;">We'll keep you updated on our progress and notify you when Carthage launches.</p>
+        <button onclick="closeModal()" 
+                style="background-color: black; color: white; padding: 1rem 2rem; border-radius: 100px; border: none; font-weight: 600; cursor: pointer;">
+          Close
+        </button>
+      </div>
+    `;
+    
+    // Cleanup
+    setTimeout(() => {
+      document.body.removeChild(iframe);
+      submitButton.innerHTML = originalButtonText;
+      submitButton.disabled = false;
+    }, 1000);
+  };
+
+  // Handle errors
+  iframe.onerror = function() {
+    alert('Sorry, there was an error submitting your request. Please try again later.');
+    document.body.removeChild(iframe);
+    submitButton.innerHTML = originalButtonText;
+    submitButton.disabled = false;
+  };
+
+  // Write form to iframe and submit
+  iframe.contentWindow.document.open();
+  iframe.contentWindow.document.write(formString);
+  iframe.contentWindow.document.close();
+}
