@@ -828,6 +828,21 @@ button a {
     margin: 15px 0;
     text-align: center;
   }
+
+  /* Center the waitlist button in mobile menu */
+  nav ul .waitlist-btn {
+    display: block;
+    margin: 15px auto; /* Changed from default margins to auto for horizontal centering */
+    text-align: center;
+  }
+
+  /* Ensure the button's link is also centered */
+  nav ul .waitlist-btn a {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    margin: 0; /* Remove any default margins */
+  }
   
   /* Hero section adjustments */
   .hero-text {
@@ -997,5 +1012,28 @@ button a {
   .hamburger.active span:nth-child(3) {
     transform: rotate(-45deg) translate(7px, -6px);
   }
+  .footer-logo {
+    display: block; /* Ensure block display */
+    margin: 0 auto 20px; /* Center horizontally with auto margins */
+    position: relative; /* Enable position context */
+    left: 33.5%; /* Move to center */
+    transform: translateX(-50%); /* Pull back by half width */
+  }
+
+  /* Ensure the first footer section (containing the logo) is properly centered */
+  .footer-section:first-child {
+    text-align: center;
+    width: 100%;
+  }
+}
+
+button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.success-message {
+  text-align: center;
+  padding: 2rem;
 }
 
